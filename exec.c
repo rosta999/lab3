@@ -18,8 +18,7 @@ exec(char *path, char **argv)
   struct proghdr ph;
   pde_t *pgdir, *oldpgdir;
   struct proc *curproc = myproc();
-  
-  uint stack_top; 
+
     
   begin_op();
 
@@ -71,8 +70,8 @@ exec(char *path, char **argv)
   // sp = sz;
   
   // Allocate stack at the top of user space
-  stack_top = KERNBASE - 4;
-  if((curproc->st = allocuvm(pgdir, stack_top - PGSIZE, stack_top)) == 0)
+  
+  if((curproc->st = allocuvm(pgdir, STACKTOP - PGSIZE, STACKTOP)) == 0)
     goto bad;
   sp = curproc->st;
 
